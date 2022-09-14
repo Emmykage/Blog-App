@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# School library
+# Blog App
 
 > In this project, i am able to build a classic example of a blog website. I am creating a fully functional website that will show the list of posts and empower readers to interact with them by adding comments and liking posts.
 
