@@ -5,8 +5,6 @@ class Comment < ApplicationRecord
   after_create :comment_counter_update
 
   def comment_counter_update
-    post.comments_counter 0 unless Post.comments_counter?
-    post.comments_counter += 1
-    post.save
+    post.increment!(:comments_counter)
   end
 end

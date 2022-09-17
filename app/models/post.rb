@@ -13,10 +13,10 @@ class Post < ApplicationRecord
   def post_counter_update
     author.posts_counter = 0 unless author.posts_counter?
     author.posts_counter += 1
-    author.save
+    # author.increment!(:posts_counter)
   end
 
   def top_five
-    Comment.where(post: self).order(created_at: :desc).limit(5)
+    Comment.where(post(:self)).order(created_at: :desc).first(5)
   end
 end

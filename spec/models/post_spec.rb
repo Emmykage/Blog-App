@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  # Create post
-
-  subject { Post.create(author: User.new(name: 'morris'), title: 'test_title', text: 'test text') }
-
+  subject do
+    test_user = User.create(name: 'Morris', posts_counter: 0)
+    Post.create(author: test_user, title: 'test_title', text: 'test text', comments_counter: 0, likes_counter: 0)
+  end
+  before { subject.save }
   it 'should not allow empty title' do
     expect(subject).to be_valid
     subject.title = nil
@@ -13,19 +14,19 @@ RSpec.describe Post, type: :model do
 
   it 'CommentsCounter should be bigger or equal than 0' do
     expect(subject.comments_counter).to be >= 0
-    subject.comments_counter = -1
   end
 
   it 'LikesCounter should be bigger or equal than 0' do
     expect(subject.likes_counter).to be >= 0
   end
 
-  it 'UpdatePostsCounter to increase on new posts' do
-    expect(subject.author.posts_counter).to be 1
+  it 'Update Posts_counter_update to increase on new posts' do
+    expect(subject.author.posts_counter).to eq 1
   end
 
-  it 'FiveMostRecentComments length should be between 0 and 5' do
-    expect(subject.five_most_recent_comments).to be_kind_of Array
-    expect(subject.five_most_recent_comments.length).to be_between(0, 5)
+  it 'Top_five length should be between 0 and 5' do
+    Comment.create(author: subject.author, post: subject, text: 'thanks for the feed back')
+    expect(subject.top_five).to be_kind_of Array
+    expect(subject.top_five.length).to be_between(0, 5)
   end
 end
