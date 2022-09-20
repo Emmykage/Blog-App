@@ -3,15 +3,20 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :comments
 
+  validates :title, presence: true
+  validates :title, length: { maximum: 250 }
+  validates :comments_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :likes_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   after_create :post_counter_update
 
   def post_counter_update
     author.posts_counter = 0 unless author.posts_counter?
     author.posts_counter += 1
-    author.save
+    # author.increment!(:posts_counter)
   end
 
   def top_five
-    Comment.where(post: self).order(created_at: :desc).limit(5)
+    Comment.where(post(:self)).order(created_at: :desc).first(5)
   end
 end
