@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller do
-  describe 'checks for response status ok' do
-    it 'returns a 200 OK status' do
-      get :index
-      expect(response).to have_http_status(:ok)
+RSpec.describe 'Post management', type: :request do
+  describe 'Get index status' do
+    it 'returns http success status' do
+      get '/users/2/posts/4'
+      expect(response).to have_http_status(:success)
     end
   end
-end
 
-RSpec.describe 'Post management', type: :request do
   it 'it directs and render users/post pages ' do
     get '/users/2/posts'
     expect(response).to render_template(:index)
