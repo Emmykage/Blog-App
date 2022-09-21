@@ -17,6 +17,6 @@ class Post < ApplicationRecord
   end
 
   def top_five
-    Comment.where(post(:self)).order(created_at: :desc).first(5)
+    Comment.where(post: self).order(created_at: :desc).first(5)
   end
 end
