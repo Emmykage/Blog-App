@@ -1,1 +1,36 @@
-<p>Here is a list of post for user <%= @user %></p>
+<%
+=begin%>
+ <p>Here is a list of post for user <%= @user %></p> 
+<%
+=end%>
+
+<section>
+
+     <div class='top-info'>
+        <div class='img-div'>
+            <img src=<%= @user.photo %>>
+        </div>
+        <div class='details'>
+            <span><%= @user.name %></span>
+            <span>Number of post: <%= @user.posts_counter %></span>
+        </div>
+    </div>
+<div class="post-container">
+    <% @Posts.each do | post| %>
+        <div class='post-div'>
+            <div>
+                <span><%= post.title %><span>
+                <p> <%= post.text %> </p>
+                <span>comments: <%= post.comments_counter %></span>
+                <span>likes: <%= post.likes_counter %></span>
+            </div>
+             <div>
+                <ul>
+                    <% comments.each do | comments | %>
+                    <li> <%= comment.user %> : <%= comment.text  %> </li>
+                    end
+                </ul>
+    </div>
+</div> 
+</div>
+</section>

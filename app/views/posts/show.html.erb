@@ -1,1 +1,22 @@
-<p>Here is the post <%= @post %> for user <%= @user%>
+<%
+=begin%>
+ <p>Here is the post <%= @post %> for user <%= @user%> 
+<%
+=end%>
+
+<section class="page-container">
+    <div>
+        <div>
+            <span> <%= post.title %>
+            <span> comments:  <%= post.comments_counter %>
+            <span> likes: <%= post.likes_counter %>
+        </div>
+        <p> <%= @post.text%> </p>
+    </div>
+    <div class="comment-section">
+        <ul>
+            <% @post.top_five.each do | comment |%>
+            <%= comeent.post.user %>
+
+    <div>
+</section>
