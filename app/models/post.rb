@@ -18,5 +18,8 @@ class Post < ApplicationRecord
 
   def top_five
     Comment.where(post: self).order(created_at: :desc).first(5)
+    # comments.includes(:post).order(created_at: :desc).limit(5)
+    # comments.order(created_at: :desc).limit(5)
+    # comments.includes([:author]).order(created_at: :desc).limit(5)--senior
   end
 end
