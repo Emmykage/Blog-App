@@ -7,8 +7,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @user = Post.find(params[:user_id])
 
+    # @user = Post.find(params[:user_id])
     # @user = User.find(params[:user_id])
     # @post = Post.where(author: @user)
     # @post = params[:post_id]

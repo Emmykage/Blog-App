@@ -1,16 +1,15 @@
-<%# <p> Here is a list of users</p> %>
 <div class="container">
-<ul>
-<%= @users.each do | user |%>
-    <li>
-        <div class='img'>
-            <img src=<%= user.photo %> alt="" >
+<ul class="user-list">
+    <%= @users.each do | user |%>
+    <li class="flex">
+        <div class='img-div'>
+            <img src=<%= user.photo%>>
         </div>
         <div class='details'>
-            <span><%= user.name %></span>
-            <span>Number of post: <%= user.posts_counter %> </span>
+            <span class="username"><%= link_to user.name, user %></span>
+            <span class="info">Number of post: <%= user.posts_counter %> </span>
         </div>
     </li>
-<%end%>
+    <%end%>
     </ul>
 </div>

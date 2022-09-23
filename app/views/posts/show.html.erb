@@ -5,18 +5,20 @@
 =end%>
 
 <section class="page-container">
-    <div>
-        <div>
-            <span> <%= post.title %>
-            <span> comments:  <%= post.comments_counter %>
-            <span> likes: <%= post.likes_counter %>
+    <div class="container">
+        <div class="top flex">
+            <span> <%= @post.title %> by <%= @post.author.name %> </span>
+             <span> comments:  <%= @post.comments_counter %>, likes: <%= @post.likes_counter %></span>
         </div>
+      
         <p> <%= @post.text%> </p>
     </div>
     <div class="comment-section">
         <ul>
             <% @post.top_five.each do | comment |%>
-            <%= comeent.post.user %>
+            <li><%= comeent.post.user %><li>
+            <%end%>
+        </ul>
 
     <div>
 </section>
