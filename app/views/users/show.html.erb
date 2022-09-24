@@ -9,6 +9,9 @@
         </div>
         
     </div>
+    <div>
+    <h2> <%= link_to 'Create new post', new_user_post_path(@user.id) %></h2>
+    </div>
 
     <div class='bio'>
         <span> Bio </span>
@@ -34,7 +37,7 @@
     </div>
 
 <div class="btn-div">
-<button><%= link_to "See all post", user_post_path(@user) %> </button>
+<button><%= link_to "See all post", user_posts_path(@user) %> </button>
 </div>
     
 
