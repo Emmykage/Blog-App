@@ -1,9 +1,9 @@
-class CommnentsController
-  # def new
-  #   @user = current_user
-  #   @post = Post.find(params[:id])
-  #   @comment = Comment.new
-  # end
+class CommentsController < ApplicationController
+  def new
+    @user = current_user
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+  end
 
   def create
     @user = current_user
@@ -13,10 +13,11 @@ class CommnentsController
     @comment.post = @post
     if @comment.save
       flash[:success] = 'Saved successfully'
-      redirect_to user_posts_path(@author, @post)
+      redirect_to user_posts_path(@post.author)
     else
       flash.now[:error] = 'FAiled to save comment'
       render :new, status: 422
+
     end
   end
 end

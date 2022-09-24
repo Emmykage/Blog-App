@@ -4,7 +4,7 @@
 <%
 =end%>
 
-<section class="page-container">
+<section class="container">
     <div class="container">
         <div class="top flex">
             <span> <%= @post.title %> by <%= @post.author.name %> </span>
@@ -16,13 +16,16 @@
     <div class="comment-section">
         <ul>
             <% @post.top_five.each do | comment |%>
-            <li><%= comeent.post.user %><li>
+            <li><span><%= comment.author.name %>:  <%= comment.text %></span><li>
             <%end%>
         </ul>
 
-    <div>
+    </div>
+    <div class="like-div">
+    <%= render 'likes/new'%>
+   </div>
+    <div class="comment-div">
     <%= render 'comments/comment' %>
-    <%= form_with model: @like, url: user_post_likes_url( @user, @post), scope: :comment, method: :post do |form| %>
-    <% form.submit 'Like' %>
-    <%end%>
+    </div>
+  
 </section>
