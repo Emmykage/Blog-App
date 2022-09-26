@@ -11,9 +11,7 @@ class Post < ApplicationRecord
   after_create :post_counter_update
 
   def post_counter_update
-    author.posts_counter = 0 unless author.posts_counter?
-    author.posts_counter += 1
-    # author.increment!(:posts_counter)
+    author.increment!(:posts_counter)
   end
 
   def top_five

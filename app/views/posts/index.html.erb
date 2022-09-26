@@ -8,33 +8,37 @@
 
     <div class='top-info flex'>
         <div class='img-div'>
-            <img src=<%= @post.author.photo %>>
+            <img src=<%= @user.photo %>>
         </div>
         <div class='details'>
-            <span class="username"><%= @post.author.name %></span>
-            <span class="info">Number of post: <%= @post.author.posts_counter %></span>
+            <span class="username"><%= @user.name %></span>
+            <span class="info">Number of post: <%= @user.posts_counter %></span>
         </div>
     </div>
     <div class="post-container">
         <div class-det>
-            <% @post.author.top_three.each do |post| %>
-                <%= link_to user_post_path(@user.id, post.id) do  %>
+            <% @posts.each do |post| %>
+                
                     <div class="post-div">
+                      
+                      <%= link_to user_post_path(@user.id, post.id) do %>
                         <span> <%= post.title %> </span>
                         <p><%= post.text%></p>
+                    <%end%>
                         <div class="post-footer">
-                            <span>comments: <%= post.comments_counter %></span>
-                            <span>likes: <%= post.likes_counter %></span>
+                            <span>comments: <%= post.comments_counter %>likes: <%= post.likes_counter %></span>
+                            
                         </div>
                     </div>
-               <%=end%>
-                    <div class='post-div'>
+               
+                    <div class='comm-div'>
                         <ul>
-                            <% post.top_five.each do | comments | %>
-                                <li> <%= comment.user %> : <%= comment.text  %> </li>
+                            <% post.top_five.each do | comment | %>
+                                <li> <%= comment.author.name %> : <%= comment.text  %> </li>
                             <%end%>
                         </ul>
                     </div>
+            
             <%end%>
         </div>
     </div>
