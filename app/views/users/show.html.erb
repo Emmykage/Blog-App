@@ -1,44 +1,43 @@
-<section class="container">
-    <div class='top-info flex'>
-        <div class='img-div'>
-            <img src=<%= @user.photo %>>
-        </div>
-        <div class='details'>
-            <span class="username"><%= @user.name %></span>
-            <span class="info">Number of post: <%= @user.posts_counter %></span>
-        </div>
-        
-    </div>
-    <div>
-    <h2> <%= link_to 'Create new post', new_user_post_path(@user.id) %></h2>
-    </div>
-
-    <div class='bio'>
-        <span> Bio </span>
-        <p> <%= @user.bio %> </p>
-    </div>
-    <div class='post-row'> 
-    <ul>
-        <% @user.top_three.each  do | post |%>
-        <%= link_to user_post_path(@user.id, post.id) do %>
-            <li>
-                <span><%= post.title %><span>
-                <p> <%= post.text %> </p>
-                <div class="span-footer">
-                <span>comments: <%= post.comments_counter %></span>
-                <span>likes: <%= post.likes_counter %></span>
-                </div>
-            </li>
-        <%end%>
-        <%end%>
-    
-    </ul>
-       
-    </div>
-
-<div class="btn-div">
-<button><%= link_to "See all post", user_posts_path(@user) %> </button>
+<div class='back_button_container'>
+  <%=link_to 'Go back', users_url, class: 'create_button back_button' %>
 </div>
-    
 
+<section class='card_layout'>
+  <div class='card_container'>
+      <img alt='This is an image' src='<%=@user.photo%>' class='user_image'/>
+      <div class='user-info'>
+        <p><%= link_to @user.name, @user, class: 'user_name' %></p>
+        <p>Number of posts: <%= @user.posts_counter%></p>
+      </div>
+    </div>
 </section>
+<section class='bio_container'>
+  <article class='bio'>
+    <p>Bio:</p>
+    <p><%=@user.bio%></p>
+  </article>
+</section>
+
+<% if @user.posts.empty? %>
+<h4>No posts created</h4>
+<% else %>
+<section class='posts_container'>
+<h4>Recents posts</h4>
+<% @user.three_recent_post.each do |post| %>
+  <article class='post_card'>
+    <div>
+      <%= link_to post.title, user_post_url(@user.id, post.id)%>
+      <p><%= post.text%></p>
+    </div>
+  <div class='counters'>
+    <p>Comments: <%=post.comments_counter%><br></p>
+    <p>Likes: <%=post.likes_counter%><br></p>
+  </div>
+  </article>
+  <% end %>
+<% end %>
+</section>
+
+<div class='create_button_container'>
+  <%= link_to 'See all posts', user_posts_url(@user.id), class: 'create_button'%>
+</div>

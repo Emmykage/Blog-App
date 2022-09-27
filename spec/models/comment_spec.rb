@@ -1,18 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  subject do
-    test_user = User.create(name: 'yankee', bio: 'Teacher from Abuja', posts_counter: 0)
-    test_post = Post.create(author: test_user, title: 'testing', text: 'thanks for testing this', comments_counter: 0,
-                            likes_counter: 0)
-    Comment.new(author: test_user, post: test_post, text: 'hey thanks for having me ')
-  end
-  before { subject.save }
+  user = User.new(
+    name: 'Gabriel',
+    photo: 'https://www.pexels.com/photo/silhouette-of-a-person-on-a-swing-3293148/',
+    bio: "I'm a student at Microverse",
+    posts_counter: 0
+  )
 
-  it 'updates comment counter post' do
-    expect(subject.post.comments_counter).to eq 1
+  subject do
+    Comment.new(
+      post: Post.new(
+        author: user,
+        title: 'Title',
+        text: 'Text',
+        comments_counter: 0,
+        likes_counter: 0
+      ),
+      author: user,
+      text: 'This is my comment :)'
+    )
   end
-  it ' user comment should be yankee' do
-    expect(subject.post.author.name).to eq 'yankee'
+
+  describe '#update_comments_counter' do
+    it 'should update the comments counter' do
+      expect(subject.send(:update_comments_counter)).to be_valid
+    end
   end
 end

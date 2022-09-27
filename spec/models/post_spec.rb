@@ -2,31 +2,64 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   subject do
-    test_user = User.create(name: 'Morris', posts_counter: 0)
-    Post.create(author: test_user, title: 'test_title', text: 'test text', comments_counter: 0, likes_counter: 0)
+    Post.new(
+      author: User.new(
+        name: 'Julio',
+        photo: 'Url',
+        bio: 'Developer',
+        posts_counter: 0
+      ),
+      title: 'This is a title',
+      text: 'This is a text',
+      comments_counter: 0,
+      likes_counter: 0
+    )
   end
+
   before { subject.save }
-  it 'should not allow empty title' do
-    expect(subject).to be_valid
-    subject.title = nil
-    expect(subject).to_not be_valid
+
+  describe 'title' do
+    it 'should not be empty' do
+      subject.title = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'should have less than 251 chars' do
+      subject.title = 'a' * 251
+      expect(subject).to_not be_valid
+    end
   end
 
-  it 'CommentsCounter should be bigger or equal than 0' do
-    expect(subject.comments_counter).to be >= 0
+  describe 'comments' do
+    it 'should be an integer' do
+      expect(subject.comments_counter).to be_an_integer
+    end
+
+    it 'should be greater than or equal to 0' do
+      expect(subject.comments_counter).to be >= 0
+    end
   end
 
-  it 'LikesCounter should be bigger or equal than 0' do
-    expect(subject.likes_counter).to be >= 0
+  describe '#recent_comments' do
+    it 'should return the last 5 comments' do
+      subject.comments.create(text: 'comment1', author: subject.author)
+      subject.comments.create(text: 'comment2', author: subject.author)
+      subject.comments.create(text: 'comment3', author: subject.author)
+      subject.comments.create(text: 'comment4', author: subject.author)
+      subject.comments.create(text: 'comment5', author: subject.author)
+      subject.comments.create(text: 'comment6', author: subject.author)
+
+      expect(subject.recent_comments.count).to eq(5)
+    end
   end
 
-  it 'Update Posts_counter_update to increase on new posts' do
-    expect(subject.author.posts_counter).to eq 1
-  end
+  describe 'likes_counter' do
+    it 'should be an integer' do
+      expect(subject.likes_counter).to be_an_integer
+    end
 
-  it 'Top_five length should be between 0 and 5' do
-    Comment.create(author: subject.author, post: subject, text: 'thanks for the feed back')
-    expect(subject.top_five).to be_kind_of Array
-    expect(subject.top_five.length).to be_between(0, 5)
+    it 'should be greater than or equal to 0' do
+      expect(subject.likes_counter).to be >= 0
+    end
   end
 end
