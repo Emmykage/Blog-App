@@ -64,7 +64,7 @@ test:
   <<: *default
   database: blog_app_test
   username: postgres
-  password: testpostgre
+  password: chemistry
   host: ''
   port: 5432
 

@@ -28,3 +28,5 @@ RSpec.describe 'show page', type: :feature do
       visit "users/#{@id}/posts/#{@post_id}"
       expect(page).to have_content(@post.comments_counter)
     end
+  end
+end
