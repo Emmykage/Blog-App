@@ -34,7 +34,7 @@ RSpec.describe 'test for post index', type: :feature do
   it 'redirected to post page' do
     visit "users/#{@user.id}/posts"
     click_link(@post.title)
-    visit "users/#{@user.id}/posts/#{post.id}"
+    visit "users/#{@user.id}/posts/#{@post.id}"
   end
 
   it 'shows some post content ' do
