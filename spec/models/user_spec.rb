@@ -28,7 +28,7 @@ RSpec.describe Like, type: :model do
     end
   end
 
-  describe '#three_recent_post' do
+  describe '#top_three' do
     it 'should return the last 3 posts' do
       subject.posts.create(title: 'title', text: 'text', comments_counter: 0, likes_counter: 0)
       subject.posts.create(title: 'title2', text: 'text', comments_counter: 0, likes_counter: 0)
@@ -36,7 +36,7 @@ RSpec.describe Like, type: :model do
       subject.posts.create(title: 'title4', text: 'text', comments_counter: 0, likes_counter: 0)
       subject.posts.create(title: 'title5', text: 'text', comments_counter: 0, likes_counter: 0)
 
-      expect(subject.three_recent_post.count).to eq(3)
+      expect(subject.top_three.count).to eq(3)
     end
   end
 end

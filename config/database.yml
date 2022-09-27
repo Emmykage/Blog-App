@@ -25,7 +25,7 @@ development:
   <<: *default
   username: postgres
   password: chemistry
-  database: my_blog_app_development
+  database: blog
   host: ''
   port: 5432
 
@@ -64,7 +64,7 @@ test:
   <<: *default
   database: blog_app_test
   username: postgres
-  password: testpostgre
+  password: chemistry
   host: ''
   port: 5432
 
