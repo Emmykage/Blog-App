@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'show page', type: :feature do
   before(:each) do
-    @user = User.create(name: 'Julio', bio: 'This is the bio',
+    @user = User.create(name: 'Morris', bio: 'This is the bio',
                         photo: 'https://i.im.ge/2022/09/22/1Ud6MY.druid.th.png')
     @id = @user.id
   end
@@ -57,6 +57,11 @@ RSpec.describe 'show page', type: :feature do
         visit "users/#{@id}/posts"
         click_link(@user.name)
         visit "users/#{@id}/posts/#{@post_id}"
+      end
+
+      it 'show a post body' do
+        visit "users/#{@id}/posts"
+        expect(page).to have_content(@post.text)
       end
     end
   end
