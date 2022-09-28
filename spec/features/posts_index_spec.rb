@@ -59,7 +59,7 @@ RSpec.describe 'show page', type: :feature do
         visit "users/#{@id}/posts/#{@post_id}"
       end
 
-      it 'show a post body' do
+      it 'show a post body text' do
         visit "users/#{@id}/posts"
         expect(page).to have_content(@post.text)
       end
