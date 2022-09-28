@@ -1,15 +1,35 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+*{
+    box-sizing: border-box;
+}
+.container{
+    max-width: 1400px;
+    margin: auto;
+    background-color: azure;
+}
+.sub-container{
+    width: 80%;
+    margin: auto;
+    border: 1px solid gray;
+}
+.form_div{
+    width: 600px;
+    margin: auto;
+    border: 1px solid black;
+}
+.form_div h2{
+    text-align: center;
+}
+.new_user{
+    width: 600PX;
+    margin: auto;
+}
+.form_field{
+    width: 100%;
+    padding: 12px;
+}
+.actions{
+    text-align: center;
+}
+.footer{
+    text-align: center;
+}
