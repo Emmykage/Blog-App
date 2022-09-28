@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .container{
     max-width: 1400px;
     margin: auto;
@@ -7,4 +10,23 @@
     width: 80%;
     margin: auto;
     border: 1px solid gray;
+}
+.form{
+    width: 600px;
+    margin: auto;
+    border: 1px solid black;
+}
+.new_user{
+    width: 600PX;
+    margin: auto;
+}
+.form_field{
+    width: 100%;
+    padding: 12px;
+}
+.actions{
+    text-align: center;
+}
+.footer{
+    text-align: center;
 }
