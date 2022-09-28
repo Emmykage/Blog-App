@@ -1,12 +1,16 @@
+<section class="container">
+
+
+<div class='sub-container'>
 <h1>Available users</h1>
-<section class='sub'>
   <% @users.each do |user| %>
-    <div class='card_container'>
-      <img alt='This is an image' src='<%=user.photo%>' class='user_image'/>
+    <div class='user_container'>
+      <div class="img-div"><img alt='image' src='<%=user.photo%>' class='image'/></div>
       <div class='user-info'>
-        <p><%= link_to user.name, user, class: 'user-name' %></p>
-        <p>Number of posts: <%= user.posts_counter%></p>
+        <span><%= link_to user.name, user, class: 'user' %></span>
+        <span class="count">Number of posts: <%= user.posts_counter%></span>
       </div>
     </div>
   <% end %>
+</div>
 </section>
