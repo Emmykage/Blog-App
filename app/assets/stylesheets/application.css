@@ -1,6 +1,9 @@
 *{
     box-sizing: border-box;
 }
+.main_container{
+    width: 100%;
+}
 .container{
     max-width: 1400px;
     margin: auto;
