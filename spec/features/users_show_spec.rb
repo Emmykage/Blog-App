@@ -52,7 +52,6 @@ RSpec.describe 'show page', type: :feature do
         click_link('See all posts')
         visit "users/#{@id}/posts"
       end
-      
     end
   end
 end
