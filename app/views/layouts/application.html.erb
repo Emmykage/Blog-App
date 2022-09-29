@@ -18,12 +18,8 @@
        <% if user_signed_in? %>
           <div class="intruction">
           <a href="/">Home</a>
-          <%
-=begin%>
- <%= button_to "sign out", destroy_user_session_path, { method: :delete, data: { turbo: false}} %> 
-<%
-=end%>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          <%= button_to "sign out", destroy_user_session_path, { method: :delete, data: { turbo: false}} %> 
+
           </div>
           <% else %>
           <a href="/users/sign_in"> Sign in</a>
