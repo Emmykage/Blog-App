@@ -12,39 +12,53 @@
     </div>
 </section>
 
-<div class='create_button_container'>
+<div class='create_div'>
   <%=link_to 'Add Post', new_user_post_url(@user.id), class: 'button' %>
 </div>
 
 <section>
+<div class="post_div">
   <% if @posts.empty? %>
-    <h1>Posts</h1>
+    <h4>There are no Posts from <%= @user.name%></h4>
     <h4>No post</h4>
   <% else %>
   <% @posts.includes([:comments]).each do |post| %>
   <section class='posts_container'>
     <h1>Posts</h1>
-    <div class='user_card'>
-      <div>
-        <%= link_to post.title, user_post_url(@user.id, post.id)%>
-        <p maxlength= 150><%= post.text %></p>
+    <div class='post_container'>
+      <div class="wide">
+        <%= link_to post.title, user_post_url(@user.id, post.id), class: "title"%>
+        <p ><%= post.text %></p>
+
+        <% if can? :delete, post %>
+
+        
+        <%= button_to "delete", user_post_path(@user.id, post.id), method: :delete %>
+                        
+    
+
+        <% end %>
       </div>
-      <div class='counters'>
-        <p>Comments: <%=post.comments_counter%><br></p>
-        <p>Likes: <%=post.likes_counter%><br></p>
+      <div class='counter'>
+        <span>Comments: <%=post.comments_counter%><br></span>
+        <span>Likes: <%=post.likes_counter%><br></span>
       </div>
     <% if post.comments.empty? %>
     <h5>No comments</h5>
     <% else %>
       <% @posts.includes([:author]).each do |comment| %>
-        <p><%=comment.author.name%>:</p>
-        <p><%=comment.text %></p>
+        <div class="comment-section">
+            <span class='bold'><%=comment.author.name%>:  </span>
+            <span><%=comment.text %></span>
+            <div><button>delete comment</button></div>
+          </div>
       <% end %>
     <% end %>
     </div>
   </section>
   <% end %>
   <% end %>
+  </div>
 </section>
 
 

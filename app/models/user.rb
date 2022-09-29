@@ -13,4 +13,6 @@ class User < ApplicationRecord
   def three_recent_post
     posts.last(3)
   end
+
+  ROLES = %i[admin default].freeze
 end

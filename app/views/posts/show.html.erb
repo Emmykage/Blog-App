@@ -1,24 +1,27 @@
-<div class='back_button_container'>
-  <%=link_to 'Go back', user_posts_url(@user.id), class: 'create_button back_button' %>
-</div>
-
 <section class='post-container'>
-  <div class='post-title'>
-    <h3>Post # <%=@post.id%> by <%=@post.author.name%></h3>
+  <div class='sub-container'>
+  <div class="top-topic">
+    <div><span> <%=@post.title%> by <%=@post.author.name%></span></div>
     <div class='post-counters'>
-      <p>Likes: <%=@post.likes_counter%></p>
-      <p>Comments: <%=@post.comments_counter%></p>
+      <span>Likes: <%=@post.likes_counter%></span>
+      <span>Comments: <%=@post.comments_counter%></span>
     </div>
   </div>
-  <p><%=@post.title%></p>
-  <p><%=@post.text%></p>
-</section>
-<% if @post.comments.empty? %>
-  <h5>No comments</h5>
-<%else %>
-  <div class='user-comments'>
+  <div> 
+    <p><%=@post.text%></p>
+    <% if can? :delete, @post%>
+    <%= button_to "delete", user_post_path, method: :delete %>
+      <% end %>
+  <% if @post.comments.empty? %>
+    <h5>No comments available</h5>
+  <%else %>
+  <div class='comment-div'>
     <% @comments.includes([:author]).each do |comment| %>
       <p><%= comment.author.name%>: <%= comment.text%></p>
+      <% if can? :delete, comment%>
+      <%= button_to "delete", user_post_comment_url(comment.author, comment.post, comment), method: :delete %>
+      <% end %>
+      <% %>
     <%end%>
 <%end%>
   </div>
@@ -38,3 +41,4 @@
 <%= form_with url: user_post_likes_url(@user, @post), method: 'post' do |form| %>
     <% form.submit 'Like' %>
 <% end %>
+</section>
