@@ -92,3 +92,45 @@
 .footer {
   text-align: center;
 }
+
+/* .user_container p{
+  
+  width: 100%;
+} */
+.wide{
+  width: 100%;
+  
+  border: 1px solid rgb(90, 90, 90);
+  /* background-color: brown; */
+  position: relative;
+}
+.wide button{
+  position: relative;
+  left: 90%
+}
+.title{
+  font-size: 28px;
+  text-decoration: none;
+}
+
+.counter{
+  text-align: right;
+  /* background-color: blue; */
+}
+.comment-section{
+  padding: 7px 12px;
+  position: relative;
+  margin-bottom: 12px;
+  background-color: rgb(118, 118, 118);
+}
+.comment-section button{
+  position: relative;
+  left: 80%
+}
+.bold{
+  font-weight: 500;
+  font-size: 21px;
+}
+.post_div{
+  background-color: rgb(171, 166, 166);
+}
