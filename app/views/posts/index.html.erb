@@ -17,7 +17,7 @@
 </div>
 
 <section>
-<div class="post_div">
+<div class="container">
   <% if @posts.empty? %>
     <h4>There are no Posts from <%= @user.name%></h4>
     <h4>No post</h4>
@@ -30,15 +30,7 @@
         <%= link_to post.title, user_post_url(@user.id, post.id), class: "title"%>
         <p ><%= post.text %></p>
 
-        <% if can? :delete, post %>
-
-        
-        <%= button_to "delete", user_post_path(@user.id, post.id), method: :delete %>
-                        
-    
-
-        <% end %>
-      </div>
+        </div>
       <div class='counter'>
         <span>Comments: <%=post.comments_counter%><br></span>
         <span>Likes: <%=post.likes_counter%><br></span>
@@ -50,7 +42,7 @@
         <div class="comment-section">
             <span class='bold'><%=comment.author.name%>:  </span>
             <span><%=comment.text %></span>
-            <div><button>delete comment</button></div>
+            
           </div>
       <% end %>
     <% end %>
