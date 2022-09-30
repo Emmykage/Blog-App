@@ -1,40 +1,41 @@
-<div class='back_button_container'>
-  <%=link_to 'Go back', user_posts_url(@user.id), class: 'create_button back_button' %>
-</div>
-
-<section class='post-container'>
-  <div class='post-title'>
+<section class='container'>
+  <div class="user_container flex">
     <h3>Post # <%=@post.id%> by <%=@post.author.name%></h3>
-    <div class='post-counters'>
-      <p>Likes: <%=@post.likes_counter%></p>
-      <p>Comments: <%=@post.comments_counter%></p>
+    <div class='flex'>
+      <span>Likes: <%=@post.likes_counter%></span>
+      <span>Comments: <%=@post.comments_counter%></span>
     </div>
   </div>
   <p><%=@post.title%></p>
   <p><%=@post.text%></p>
 </section>
-<% if @post.comments.empty? %>
-  <h5>No comments</h5>
-<%else %>
-  <div class='user-comments'>
-    <% @comments.includes([:author]).each do |comment| %>
-      <p><%= comment.author.name%>: <%= comment.text%></p>
+<div class="container">
+<div class='user-comments'>
+  <% if @post.comments.empty? %>
+    <h5>No comments</h5>
+    <%else %>
+    
+      <% @comments.includes([:author]).each do |comment| %>
+        <p><%= comment.author.name%>: <%= comment.text%></p>
     <%end%>
-<%end%>
-  </div>
+  <%end%>
+</div>
 
 <h1>New Comment</h1>
-<%= form_with url: user_post_comments_url(@user, @post), method: :post, local: true, scope: :comment do |f| %>
+ <div class=form_div>
+  <%= form_with url: user_post_comments_url(@user, @post), method: :post, local: true, scope: :comment do |f| %>
 
-  <div>
+ 
     <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </div>
+    <%= f.text_area :text, class: "input_field" %>
+
 
   <%= f.submit "Create Comment" %>
 
 <% end %>
+  </div>
 
 <%= form_with url: user_post_likes_url(@user, @post), method: 'post' do |form| %>
     <% form.submit 'Like' %>
 <% end %>
+</div>
