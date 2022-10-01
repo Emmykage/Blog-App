@@ -30,6 +30,11 @@
   margin-right: 18px;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .user_container {
   border: 1px solid grey;
   width: 100%;
