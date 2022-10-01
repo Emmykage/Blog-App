@@ -1,45 +1,52 @@
-<%
-=begin%>
- <p>Here is a list of post for user <%= @user %></p> 
-<%
-=end%>
+<div class='back_button_container'>
+  <%=link_to 'Go back', user_url(@user.id), class: 'create_button back_button' %>
+</div>
 
-<section class="container">
-
-    <div class='top-info flex'>
-        <div class='img-div'>
-            <img src=<%= @user.photo %>>
-        </div>
-        <div class='details'>
-            <span class="username"><%= @user.name %></span>
-            <span class="info">Number of post: <%= @user.posts_counter %></span>
-        </div>
-    </div>
-    <div class="post-container">
-        <div class-det>
-            <% @posts.each do |post| %>
-                
-                    <div class="post-div">
-                      
-                      <%= link_to user_post_path(@user.id, post.id) do %>
-                        <span> <%= post.title %> </span>
-                        <p><%= post.text%></p>
-                    <%end%>
-                        <div class="post-footer">
-                            <span>comments: <%= post.comments_counter %>likes: <%= post.likes_counter %></span>
-                            
-                        </div>
-                    </div>
-               
-                    <div class='comm-div'>
-                        <ul>
-                            <% post.top_five.each do | comment | %>
-                                <li> <%= comment.author.name %> : <%= comment.text  %> </li>
-                            <%end%>
-                        </ul>
-                    </div>
-            
-            <%end%>
-        </div>
+<section>
+ <div class='card_container'>
+      <img alt='This is an image' src='<%=@user.photo%>' class='user_image'/>
+      <div class='user-info'>
+        <p><%= link_to @user.name, @user, class: 'user-name' %></p>
+        <p>Number of posts: <%= @user.posts_counter%></p>
+      </div>
     </div>
 </section>
+
+<div class='create_button_container'>
+  <%=link_to 'Create a Post', new_user_post_url(@user.id), class: 'create_button' %>
+</div>
+
+<section>
+  <% if @posts.empty? %>
+    <h1>Posts</h1>
+    <h4>This user hasn't create any post yet</h4>
+  <% else %>
+  <% @posts.includes([:comments]).each do |post| %>
+  <section class='posts_container'>
+    <h1>Posts</h1>
+    <article class='post_card'>
+      <div>
+        <%= link_to post.title, user_post_url(@user.id, post.id)%>
+        <p maxlength= 150><%= post.text %></p>
+      </div>
+      <div class='counters'>
+        <p>Comments: <%=post.comments_counter%><br></p>
+        <p>Likes: <%=post.likes_counter%><br></p>
+      </div>
+    <% if post.comments.empty? %>
+    <h5>No comments</h5>
+    <% else %>
+      <% @posts.includes([:author]).each do |comment| %>
+        <p><%=comment.author.name%>:</p>
+        <p><%=comment.text %></p>
+      <% end %>
+    <% end %>
+    </article>
+  </section>
+  <% end %>
+  <% end %>
+</section>
+
+<div class='create_button_container'>
+  <%=link_to 'Pagination', new_user_post_url(@user.id), class: 'create_button' %>
+</div>
