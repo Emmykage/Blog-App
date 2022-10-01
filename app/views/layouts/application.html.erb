@@ -11,11 +11,20 @@
   </head>
 
   <body>
+      <div class="main_container">
+      <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+       <% if user_signed_in? %>
+          <div class="intruction">
+          <a href="/">Home</a>
+          <%= button_to "sign out", destroy_user_session_path, { method: :delete, data: { turbo: false}} %> 
+
+          </div>
+          <% else %>
+          <a href="/users/sign_in"> Sign in</a>
+        <% end %>
       <%= yield %>
-  <% flash.each do |type, msg| %>
-        <div class="alert <%= type %>">
-          <%= msg %>
-        </div>
-      <% end %>
+    </div>
   </body>
 </html>

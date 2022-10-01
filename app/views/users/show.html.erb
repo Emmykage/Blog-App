@@ -1,14 +1,13 @@
-<div class='back_button_container'>
-  <%=link_to 'Go back', users_url, class: 'create_button back_button' %>
-</div>
-
 <section class='card_layout'>
-  <div class='card_container'>
+  <div class='user_container'>
+    <div class="img-div">
       <img alt='This is an image' src='<%=@user.photo%>' class='user_image'/>
+    </div>
       <div class='user-info'>
-        <p><%= link_to @user.name, @user, class: 'user_name' %></p>
-        <p>Number of posts: <%= @user.posts_counter%></p>
+        <span><%= link_to @user.name, @user, class: 'user' %></span>
+        <span class="count">Number of posts: <%= @user.posts_counter%></span>
       </div>
+    </div>
     </div>
 </section>
 <section class='bio_container'>

@@ -1,52 +1,56 @@
-<div class='back_button_container'>
-  <%=link_to 'Go back', user_url(@user.id), class: 'create_button back_button' %>
-</div>
 
-<section>
- <div class='card_container'>
-      <img alt='This is an image' src='<%=@user.photo%>' class='user_image'/>
+<section class="container">
+  <div class='sub_container'>
+    <div class="user_container">
+      <div class='img-div'>
+      <img alt='image' src='<%=@user.photo%>' class='image'/>
+      </div>
       <div class='user-info'>
-        <p><%= link_to @user.name, @user, class: 'user-name' %></p>
-        <p>Number of posts: <%= @user.posts_counter%></p>
+        <span><%= link_to @user.name, @user, class: 'user' %></span>
+        <span>Number of posts: <%= @user.posts_counter%></span>
       </div>
     </div>
 </section>
 
-<div class='create_button_container'>
-  <%=link_to 'Create a Post', new_user_post_url(@user.id), class: 'create_button' %>
+<div class='create_div'>
+  <%=link_to 'Add Post', new_user_post_url(@user.id), class: 'button' %>
 </div>
 
 <section>
+<div class="container">
   <% if @posts.empty? %>
-    <h1>Posts</h1>
-    <h4>This user hasn't create any post yet</h4>
+    <h4>There are no Posts from <%= @user.name%></h4>
+    <h4>No post</h4>
   <% else %>
   <% @posts.includes([:comments]).each do |post| %>
   <section class='posts_container'>
     <h1>Posts</h1>
-    <article class='post_card'>
-      <div>
-        <%= link_to post.title, user_post_url(@user.id, post.id)%>
-        <p maxlength= 150><%= post.text %></p>
-      </div>
-      <div class='counters'>
-        <p>Comments: <%=post.comments_counter%><br></p>
-        <p>Likes: <%=post.likes_counter%><br></p>
+    <div class='post_container'>
+      <div class="wide">
+        <%= link_to post.title, user_post_url(@user.id, post.id), class: "title"%>
+        <p ><%= post.text %></p>
+
+       </div>
+      <div class='counter'>
+        <span>Comments: <%=post.comments_counter%><br></span>
+        <span>Likes: <%=post.likes_counter%><br></span>
       </div>
     <% if post.comments.empty? %>
     <h5>No comments</h5>
     <% else %>
       <% @posts.includes([:author]).each do |comment| %>
-        <p><%=comment.author.name%>:</p>
-        <p><%=comment.text %></p>
+        <div class="comment-section">
+            <span class='bold'><%=comment.author.name%>:  </span>
+            <span><%=comment.text %></span>
+           
+          </div>
       <% end %>
     <% end %>
-    </article>
+    </div>
   </section>
   <% end %>
   <% end %>
+  </div>
 </section>
 
-<div class='create_button_container'>
-  <%=link_to 'Pagination', new_user_post_url(@user.id), class: 'create_button' %>
-</div>
+
