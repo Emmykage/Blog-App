@@ -9,7 +9,7 @@
   </div>
   <div> 
     <p><%=@post.text%></p>
-    <% if can? :delete, @post%>
+    <% if can? :destroy, @post%>
     <%= button_to "delete", user_post_path, method: :delete %>
       <% end %>
   <% if @post.comments.empty? %>
